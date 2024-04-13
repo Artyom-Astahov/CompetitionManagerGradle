@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: CompetitionManagerGradle
+  datasource:
+    url: jdbc:postgresql://localhost:5432/competition_manager_repo
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+        hbm2ddl: validate
+
+logging:
+  level:
+    root: INFO
+  file:
+    name: log
+    path: /logger/
