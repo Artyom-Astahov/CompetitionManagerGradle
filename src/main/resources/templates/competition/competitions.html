@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Competitions</title>
+</head>
+<body>
+<form action="/competitions">
+    <label for="dateEvent">Date event:
+        <input id="dateEvent" type="date" name="dateEvent" th:value="${filter.dateEvent()}">
+
+    </label>
+    <label for="description">Description:
+        <input id="description" type="text" name="description" th:value="${filter.description()}">
+    </label>
+
+            <div>
+                <label for="page">Page:
+                    <input id="page" type="number" name="page" th:value="${competitions.metadata.page}">
+                </label>
+                <label for="size">Size:
+                    <input id="size" type="number" name="size" th:value="${competitions.metadata.size}">
+                </label>
+            </div>
+            <button type="submit">Filter</button>
+</form>
+<div th:each="competition : ${competitions.content}">
+    <a th:href="@{'/competition/' + ${competition.id}}"
+       th:text="|${competition.dateEvent}   ${competition.description}|">Competition</a>
+</div>
+</body>
+</html>

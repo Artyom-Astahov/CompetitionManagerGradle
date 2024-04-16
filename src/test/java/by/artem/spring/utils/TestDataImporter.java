@@ -22,6 +22,7 @@ public class TestDataImporter {
         User leeLabrada = saveUser(session, "leeLabrada", "123", RolesEnum.ATHLETE);
         User donReinhald = saveUser(session, "donReinhald", "123", RolesEnum.ATHLETE);
         User jasonOtto = saveUser(session, "jasonOtto", "123", RolesEnum.ATHLETE);
+        User admin = saveUser(session, "admin", "admin", RolesEnum.ADMIN);
 
         saveUserInfo(session, edCohen, "Ed Cohen", 105,
                 SportCategoryEnum.MS, LocalDate.of(1987, 02, 21));

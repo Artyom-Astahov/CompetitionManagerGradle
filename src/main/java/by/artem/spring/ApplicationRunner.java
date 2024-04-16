@@ -1,7 +1,7 @@
 package by.artem.spring;
 
 
-import by.artem.spring.service.UserService;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;

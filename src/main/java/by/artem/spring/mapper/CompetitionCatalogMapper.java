@@ -1,9 +1,12 @@
 package by.artem.spring.mapper;
 
-import lombok.RequiredArgsConstructor;
-import lombok.ToString;
+import by.artem.spring.database.entity.CompetitionCatalog;
+import by.artem.spring.dto.CompetitionCatalogReadDto;
+import org.mapstruct.Mapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
-@RequiredArgsConstructor
-@ToString
-public class CompetitionCatalogMapper {
+@Mapper(componentModel = "spring")
+public interface CompetitionCatalogMapper {
+    CompetitionCatalogReadDto toDto(CompetitionCatalog competitionCatalog);
 }
