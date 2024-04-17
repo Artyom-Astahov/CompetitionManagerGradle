@@ -3,9 +3,8 @@ package by.artem.spring.service;
 
 import by.artem.spring.database.entity.User;
 import by.artem.spring.database.repository.UserRepository;
-import by.artem.spring.dto.CompetitionCatalogFilter;
-import by.artem.spring.dto.CompetitionCatalogReadDto;
-import by.artem.spring.dto.UserFilter;
+import by.artem.spring.dto.*;
+import by.artem.spring.mapper.UserMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,15 +12,26 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static by.artem.spring.database.entity.QUser.user;
+
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
-    public List<User> findAll(UserFilter filter, Pageable pageable){
-        return null;
+    public Page<UserReadDto> findAll(UserFilter filter, Pageable pageable){
+        var predicate = QPredicates.builder()
+                .add(filter.name(), user.userInfo.name::containsIgnoreCase)
+                .add(filter.weight(), user.userInfo.weight::lt)
+                .add(filter.category(), user.userInfo.category::eq)
+                .add(filter.dateBirth(), user.userInfo.dateBirth::before )
+                .build();
+
+        return userRepository.findAll(predicate, pageable)
+                .map(userMapper::toDto);
     }
     //TODO findAll()
     //TODO update()

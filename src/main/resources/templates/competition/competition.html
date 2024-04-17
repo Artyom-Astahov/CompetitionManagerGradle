@@ -10,7 +10,7 @@
         <input id="dateEvent" type="datetime-local" name="dateEvent" th:value="*{dateEvent}">
     </label><br>
     <label for="description">Description:
-        <input id="description" type="date" name="description" th:value="*{description}">
+        <input id="description" type="text" name="description" th:value="*{description}">
     </label><br>
     <button type="submit">Update</button>
     <div th:each="user : ${users}">
