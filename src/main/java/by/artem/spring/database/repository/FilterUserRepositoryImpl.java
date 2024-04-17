@@ -27,6 +27,7 @@ public class FilterUserRepositoryImpl implements FilterUserRepository{
                 .add(filter.weight(), user.userInfo.weight::lt)
                 .add(filter.category(), user.userInfo.category::eq)
                 .add(filter.dateBirth(), user.userInfo.dateBirth::before )
+                .add(filter.role(), user.role::eq)
                 .build();
         return new JPAQuery<User>(entityManager)
                 .select(user)
