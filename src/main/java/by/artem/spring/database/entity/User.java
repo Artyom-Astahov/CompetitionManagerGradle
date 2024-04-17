@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString
 @Entity
 @Slf4j
 @Table(schema = "public")
@@ -27,11 +26,11 @@ public class User implements BaseEntity<Integer>{
     @OneToOne(
             mappedBy = "user",
             cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     private UserInfo userInfo;
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "participants", joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "competition_catalog_id"))
     private List<CompetitionCatalog> competitionCatalogs = new ArrayList<>();

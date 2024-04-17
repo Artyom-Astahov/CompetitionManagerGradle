@@ -7,7 +7,7 @@
 <body>
 <form action="/competitions">
     <label for="dateEvent">Date event:
-        <input id="dateEvent" type="date" name="dateEvent" th:value="${filter.dateEvent()}">
+        <input id="dateEvent" type="datetime-local" name="dateEvent" th:value="${filter.dateEvent()}">
 
     </label>
     <label for="description">Description:
@@ -25,7 +25,7 @@
             <button type="submit">Filter</button>
 </form>
 <div th:each="competition : ${competitions.content}">
-    <a th:href="@{'/competition/' + ${competition.id}}"
+    <a th:href="@{'/competitions/' + ${competition.id}}"
        th:text="|${competition.dateEvent}   ${competition.description}|">Competition</a>
 </div>
 </body>

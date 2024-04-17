@@ -6,6 +6,7 @@ import lombok.Value;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Value
 public class CompetitionCatalogReadDto {
@@ -13,4 +14,5 @@ public class CompetitionCatalogReadDto {
     Integer id;
     LocalDateTime dateEvent;
     String description;
+    List<UserReadDto> users;
 }

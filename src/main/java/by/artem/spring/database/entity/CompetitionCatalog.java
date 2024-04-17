@@ -13,7 +13,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@ToString(exclude = "users")
 @Entity
 @Table(schema = "public")
 @Audited
@@ -26,7 +25,7 @@ public final class CompetitionCatalog implements BaseEntity<Integer>{
 
     @NotAudited
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "participants", joinColumns = @JoinColumn(name = "competition_catalog_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users = new ArrayList<>();

@@ -6,12 +6,15 @@ import by.artem.spring.database.repository.CompetitionCatalogRepository;
 import by.artem.spring.dto.CompetitionCatalogFilter;
 import by.artem.spring.dto.CompetitionCatalogReadDto;
 import by.artem.spring.dto.QPredicates;
+import by.artem.spring.dto.UserReadDto;
 import by.artem.spring.mapper.CompetitionCatalogMapper;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 import static by.artem.spring.database.entity.QCompetitionCatalog.*;
 
@@ -29,6 +32,11 @@ public class CompetitionCatalogService {
                 .add(filter.dateEvent(), competitionCatalog.dateEvent::before)
                 .build();
         return competitionCatalogRepository.findAll(predicate, pageable)
+                .map(competitionCatalogMapper::toDto);
+    }
+
+    public Optional<CompetitionCatalogReadDto> findById(Integer id){
+        return competitionCatalogRepository.findById(id)
                 .map(competitionCatalogMapper::toDto);
     }
 
