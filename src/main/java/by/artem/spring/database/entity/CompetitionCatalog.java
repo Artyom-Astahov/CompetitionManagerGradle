@@ -15,7 +15,7 @@ import java.util.List;
 @Builder
 @Entity
 @Table(schema = "public")
-@Audited
+
 public final class CompetitionCatalog implements BaseEntity<Integer>{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +23,10 @@ public final class CompetitionCatalog implements BaseEntity<Integer>{
     private LocalDateTime dateEvent;
     private String description;
 
-    @NotAudited
     @Builder.Default
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "participants", joinColumns = @JoinColumn(name = "competition_catalog_id"),
             inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users = new ArrayList<>();
-
-
 
 }

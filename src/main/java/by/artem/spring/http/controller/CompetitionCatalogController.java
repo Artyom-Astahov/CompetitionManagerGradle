@@ -1,8 +1,6 @@
 package by.artem.spring.http.controller;
 
-import by.artem.spring.dto.CompetitionCatalogFilter;
-import by.artem.spring.dto.CompetitionCatalogReadDto;
-import by.artem.spring.dto.PageResponse;
+import by.artem.spring.dto.*;
 import by.artem.spring.service.CompetitionCatalogService;
 import by.artem.spring.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -13,9 +11,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -24,7 +21,6 @@ import org.springframework.web.server.ResponseStatusException;
 @Slf4j
 public class CompetitionCatalogController {
     private final CompetitionCatalogService competitionCatalogService;
-    private final UserService userService;
 
     @GetMapping
     public String findAll(Model model, CompetitionCatalogFilter filter, Pageable pageable){
@@ -43,5 +39,18 @@ public class CompetitionCatalogController {
                     return "competition/competition";
                         })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("/{id}/update")
+    public String update(@PathVariable("id") Integer id, @ModelAttribute @Validated CompetitionCreateEditDto competitionCreateEditDto) {
+        return competitionCatalogService.update(id, competitionCreateEditDto)
+                .map(it -> "redirect:/competitions/{id}")
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable("id") Integer id) {
+        competitionCatalogService.delete(id);
+        return "redirect:/competitions";
     }
 }
