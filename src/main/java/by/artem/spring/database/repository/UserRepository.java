@@ -1,6 +1,7 @@
 package by.artem.spring.database.repository;
 
 
+import by.artem.spring.database.entity.CompetitionCatalog;
 import by.artem.spring.database.entity.User;
 import by.artem.spring.database.entity.UserInfo;
 import net.bytebuddy.TypeCache;
@@ -13,9 +14,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
-
-
-
+public interface UserRepository extends JpaRepository<User, Integer>,
+        FilterUserRepository, QuerydslPredicateExecutor<User>{
 
 }

@@ -6,7 +6,6 @@ import by.artem.spring.database.repository.CompetitionCatalogRepository;
 import by.artem.spring.dto.CompetitionCatalogFilter;
 import by.artem.spring.dto.CompetitionCatalogReadDto;
 import by.artem.spring.dto.QPredicates;
-import by.artem.spring.dto.UserReadDto;
 import by.artem.spring.mapper.CompetitionCatalogMapper;
 import lombok.RequiredArgsConstructor;
 
@@ -39,5 +38,9 @@ public class CompetitionCatalogService {
         return competitionCatalogRepository.findById(id)
                 .map(competitionCatalogMapper::toDto);
     }
+
+    //TODO update()
+    //TODO delete()
+    //TODO create()
 
 }
