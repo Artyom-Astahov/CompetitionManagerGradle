@@ -45,14 +45,16 @@ public class UserController {
                     model.addAttribute("user", user);
                     model.addAttribute("categories", SportCategoryEnum.values());
                     model.addAttribute("roles", RolesEnum.values());
+//                    model.addAttribute("userInfo", user.getUserInfo());
                     return "user/user";
                 })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Integer id, @ModelAttribute @Validated UserCreateEditDto userCreateEditDto) {
-        return userService.update(id, userCreateEditDto)
+    public String update(@PathVariable("id") Integer id, @ModelAttribute @Validated UserCreateEditDto userCreateEditDto,
+                         @ModelAttribute @Validated UserInfoCreateEditDto userInfoCreateEditDto) {
+        return userService.update(id, userCreateEditDto, userInfoCreateEditDto)
                 .map(it -> "redirect:/users/{id}")
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }

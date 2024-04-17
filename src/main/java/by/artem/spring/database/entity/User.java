@@ -14,6 +14,7 @@ import java.util.List;
 @Builder
 @Entity
 @Slf4j
+@ToString(exclude = "competitionCatalogs")
 @Table(schema = "public")
 public class User implements BaseEntity<Integer>{
     @Id

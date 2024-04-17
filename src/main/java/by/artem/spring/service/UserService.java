@@ -39,14 +39,16 @@ public class UserService {
     }
 
     public Optional<UserReadDto> findById(Integer id) {
-        return userRepository.findById(id)
+        Optional<UserReadDto> obj = userRepository.findById(id)
                 .map(userMapper::toDto);
+        return obj;
     }
-    //TODO исправить
+    //TODO UserCreateEditDto не приходит userInfo
     @Transactional
-    public Optional<UserReadDto> update(Integer id, UserCreateEditDto userDto) {
+    public Optional<UserReadDto> update(Integer id, UserCreateEditDto userDto, UserInfoCreateEditDto userInfoDto) {
+
         return userRepository.findById(id)
-                .map(entity -> userMapper.ReadDtoToCreateDto(userDto, entity))
+                .map(entity -> userMapper.ReadDtoToCreateDto(userDto, userInfoDto,  entity))
                 .map(userRepository::saveAndFlush)
                 .map(userMapper::toDto);
     }

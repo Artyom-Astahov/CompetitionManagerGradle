@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @Builder
 @Entity
 @Slf4j
+@ToString(exclude = "user")
 @Table(schema = "public")
 public class UserInfo implements BaseEntity<Integer>{
     @Id
