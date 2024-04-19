@@ -15,17 +15,16 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     UserReadDto toDto(User user);
-    @Mapping(target = "userInfo", source = "userInfo")
     User toEntity(UserCreateEditDto userCreateEditDto);
     UserInfo toEntityUserInfo(UserInfoCreateEditDto userInfoCreateEditDto);
 
-    default User ReadDtoToCreateDto(UserCreateEditDto fromObject, UserInfoCreateEditDto userInfoDto, User toObject){
+    default User ReadDtoToCreateDto(UserReadDto fromObject, User toObject){
         toObject.setRole(fromObject.getRole());
         toObject.setLogin(fromObject.getLogin());
-        toObject.getUserInfo().setCategory(userInfoDto.getCategory());
-        toObject.getUserInfo().setName(userInfoDto.getName());
-        toObject.getUserInfo().setWeight(userInfoDto.getWeight());
-        toObject.getUserInfo().setDateBirth(userInfoDto.getDateBirth());
+        toObject.getUserInfo().setCategory(fromObject.getUserInfo().getCategory());
+        toObject.getUserInfo().setName(fromObject.getUserInfo().getName());
+        toObject.getUserInfo().setWeight(fromObject.getUserInfo().getWeight());
+        toObject.getUserInfo().setDateBirth(fromObject.getUserInfo().getDateBirth());
         return toObject;
     }
 }

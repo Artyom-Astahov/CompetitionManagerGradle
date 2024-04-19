@@ -2,6 +2,7 @@ package by.artem.spring.service;
 
 
 import by.artem.spring.database.entity.User;
+import by.artem.spring.database.entity.UserInfo;
 import by.artem.spring.database.repository.UserRepository;
 import by.artem.spring.dto.*;
 import by.artem.spring.mapper.UserMapper;
@@ -43,12 +44,12 @@ public class UserService {
                 .map(userMapper::toDto);
         return obj;
     }
-    //TODO UserCreateEditDto не приходит userInfo
+
     @Transactional
-    public Optional<UserReadDto> update(Integer id, UserCreateEditDto userDto, UserInfoCreateEditDto userInfoDto) {
+    public Optional<UserReadDto> update(Integer id, UserReadDto userDto) {
 
         return userRepository.findById(id)
-                .map(entity -> userMapper.ReadDtoToCreateDto(userDto, userInfoDto,  entity))
+                .map(entity -> userMapper.ReadDtoToCreateDto(userDto,  entity))
                 .map(userRepository::saveAndFlush)
                 .map(userMapper::toDto);
     }
@@ -57,9 +58,15 @@ public class UserService {
     public UserReadDto create(UserCreateEditDto userDto) {
         return Optional.of(userDto)
                 .map(userMapper::toEntity)
+                .map(user -> {
+                        UserInfo userInfo = userMapper.toEntityUserInfo(userDto.getUserInfo());
+                        userInfo.setUser(user);
+                        user.setUserInfo(userInfo);
+                        return user;
+                })
                 .map(userRepository::save)
                 .map(userMapper::toDto)
-                .orElseThrow();
+                .orElseThrow(() -> new RuntimeException("Unable to create User"));
     }
 
 

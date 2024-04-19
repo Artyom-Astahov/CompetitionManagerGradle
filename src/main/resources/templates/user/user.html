@@ -13,13 +13,13 @@
         <input id="password" type="password" name="password" th:value="*{password}">
     </label><br>
     <label for="name">Name:
-        <input id="name" type="text" name="name" th:value="*{getUserInfo().name}">
+        <input id="name" type="text" name="userInfo.name" th:value="*{userInfo.name}">
     </label><br>
     <label for="weight">Weight:
-        <input id="weight" type="number" name="weight" th:value="*{getUserInfo().weight}">
+        <input id="weight" type="number" name="userInfo.weight" th:value="*{userInfo.weight}">
     </label><br>
     <label for="dateBirth">Date Birth:
-        <input id="dateBirth" type="date" name="dateBirth" th:value="*{getUserInfo().dateBirth}">
+        <input id="dateBirth" type="date" name="userInfo.dateBirth" th:value="*{userInfo.dateBirth}">
     </label><br>
     <label>Role:
         <div th:each="role : ${roles}">
@@ -29,8 +29,8 @@
     </label>
     <label>Category:
         <div th:each="category : ${categories}">
-            <input th:id="${category}" type="radio" name="category" th:value="${category}"
-                   th:checked="${category == user.getUserInfo().getCategory()}">
+            <input th:id="${category}" type="radio" name="userInfo.category" th:value="${category}"
+                   th:checked="${category == user.userInfo.category}">
             <label th:for="${category}" th:text="${category}">Category name</label>
         </div>
     </label>

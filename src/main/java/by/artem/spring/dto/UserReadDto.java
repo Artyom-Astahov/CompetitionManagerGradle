@@ -1,11 +1,16 @@
 package by.artem.spring.dto;
 
 import by.artem.spring.database.entity.RolesEnum;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 
 import java.util.List;
 
-@Value
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserReadDto {
     Integer id;
     String login;

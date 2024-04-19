@@ -4,13 +4,19 @@ import by.artem.spring.database.entity.RolesEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
 import org.springframework.validation.annotation.Validated;
 
-@Value
+
 @Validated
 @FieldNameConstants
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserCreateEditDto {
     @NotBlank
     String login;
@@ -18,6 +24,6 @@ public class UserCreateEditDto {
     String password;
     @NotNull
     RolesEnum role;
-    UserInfoCreateEditDto userInfo;
+    UserInfoCreateEditDto userInfo = new UserInfoCreateEditDto();
 
 }

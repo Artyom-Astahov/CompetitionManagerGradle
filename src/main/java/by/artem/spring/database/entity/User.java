@@ -47,4 +47,5 @@ public class User implements BaseEntity<Integer>{
         competitionCatalog.getUsers().add(this);
     }
 
+
 }

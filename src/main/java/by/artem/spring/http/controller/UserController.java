@@ -29,7 +29,7 @@ public class UserController {
     private final CompetitionCatalogService competitionCatalogService;
 
     @GetMapping
-    public String findAll(Model model, UserFilter filter, Pageable pageable){
+    public String findAll(Model model, UserFilter filter, Pageable pageable) {
         Page<UserReadDto> page = userService.findAll(filter, pageable);
         model.addAttribute("users", PageResponse.of(page));
         model.addAttribute("filter", filter);
@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public String findById(@PathVariable("id") Integer id, Model model){
+    public String findById(@PathVariable("id") Integer id, Model model) {
         return userService.findById(id)
                 .map(user -> {
                     model.addAttribute("user", user);
@@ -52,9 +52,8 @@ public class UserController {
     }
 
     @PostMapping("/{id}/update")
-    public String update(@PathVariable("id") Integer id, @ModelAttribute @Validated UserCreateEditDto userCreateEditDto,
-                         @ModelAttribute @Validated UserInfoCreateEditDto userInfoCreateEditDto) {
-        return userService.update(id, userCreateEditDto, userInfoCreateEditDto)
+    public String update(@PathVariable("id") Integer id, @ModelAttribute @Validated UserReadDto userReadDto) {
+        return userService.update(id, userReadDto)
                 .map(it -> "redirect:/users/{id}")
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
@@ -75,6 +74,15 @@ public class UserController {
     public String delete(@PathVariable("id") Integer id) {
         userService.delete(id);
         return "redirect:/users";
+    }
+
+
+    @GetMapping("/registration")
+    public String registration(Model model, @ModelAttribute("user") UserCreateEditDto user) {
+        model.addAttribute("user", user);
+        model.addAttribute("roles", RolesEnum.values());
+        model.addAttribute("categories", SportCategoryEnum.values());
+        return "user/registration";
     }
 
 }
