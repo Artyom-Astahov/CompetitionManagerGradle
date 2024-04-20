@@ -25,6 +25,12 @@ public class CompetitionCatalogRepositoryTest {
     private final EntityManager entityManager;
 
     @Test
+    void findAll(){
+        var competitions = competitionCatalogRepository.findAll();
+        assertThat(competitions).hasSize(2);
+    }
+
+    @Test
     void findById(){
         var competition = competitionCatalogRepository.findById(1);
         assertThat(competition.get().getDescription()).contains("SBD Sheffield");

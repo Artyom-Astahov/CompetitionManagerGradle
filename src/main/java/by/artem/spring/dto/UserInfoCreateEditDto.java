@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
 import lombok.experimental.FieldNameConstants;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -26,5 +27,6 @@ public class UserInfoCreateEditDto {
     @NotBlank
     SportCategoryEnum category;
     @Past
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
     LocalDate dateBirth;
 }

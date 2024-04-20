@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>User</title>
 </head>
 <body>
-<form th:action="@{/competitions/{competitionId}/update(competitionId=${competition.id})}" method="post" th:object="${competition}">
+<form th:action="@{/competitions/{competitionId}/update(competitionId=${competition.id})}" method="post"
+      th:object="${competition}">
     <label for="dateEvent">Date event:
         <input id="dateEvent" type="datetime-local" name="dateEvent" th:value="*{dateEvent}">
     </label><br>
@@ -17,9 +18,21 @@
         <a th:href="@{'/users/' + ${user.id}}"
            th:text="|${user.getUserInfo().getName()} ${user.getUserInfo().getWeight()} ${user.getUserInfo().getCategory()}|">User</a>
     </div>
+    </br>
+    </br>
+    </br>
+    <!--<form th:action="@{/competitions/{competitionId}/delete(competitionId=${competition.id})}" th:if="${user.role.name() == 'ADMIN'}" method="post">-->
+    <!--    <button type="submit">Remove</button>-->
+    <!--</form>-->
 </form>
-<!--<form th:action="@{/competitions/{competitionId}/delete(competitionId=${competition.id})}" th:if="${user.role.name() == 'ADMIN'}" method="post">-->
-<!--    <button type="submit">Remove</button>-->
+
+<!--<form action="#" th:action="@{/competitions/{competitionId}/addathlete}" th:object="${selectionForm}" method="post">-->
+<!--    <select th:field="*{selectedItem}">-->
+<!--        <option th:each="item : ${items}" th:value="${item}" th:text="${item}"></option>-->
+<!--    </select>-->
+<!--    <button type="submit">Submit</button>-->
+<!--    <button type="submit"><a th:href="'/competitions/' + ${competition.id} + '/addathlete'">Add Athlete</a></button>-->
 <!--</form>-->
+
 </body>
 </html>

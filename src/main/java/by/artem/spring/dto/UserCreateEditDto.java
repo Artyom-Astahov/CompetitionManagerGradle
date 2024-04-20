@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class UserCreateEditDto {
     @NotBlank
     String login;

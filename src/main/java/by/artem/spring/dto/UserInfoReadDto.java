@@ -5,12 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Value;
+import lombok.experimental.FieldNameConstants;
 
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@FieldNameConstants
 public class UserInfoReadDto {
     Integer id;
     String name;

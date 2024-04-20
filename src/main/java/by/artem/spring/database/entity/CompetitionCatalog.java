@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 @Entity
+@ToString(exclude = "users")
 @Table(schema = "public")
 
 public final class CompetitionCatalog implements BaseEntity<Integer>{

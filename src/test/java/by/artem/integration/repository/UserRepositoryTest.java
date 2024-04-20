@@ -21,6 +21,12 @@ public class UserRepositoryTest {
     private final UserRepository userRepository;
     private final EntityManager entityManager;
 
+
+    @Test
+    void findAll(){
+        var users = userRepository.findAll();
+        assertThat(users).hasSize(6);
+    }
     @Test
     void findById(){
         var user = userRepository.findById(1);

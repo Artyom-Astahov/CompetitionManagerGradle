@@ -53,4 +53,9 @@ public class CompetitionCatalogController {
         competitionCatalogService.delete(id);
         return "redirect:/competitions";
     }
+
+//    @GetMapping("/{id}/addathlete")
+//    public String addAtheltePage(Model model){
+//        return "competition/addathlete";
+//    }
 }
