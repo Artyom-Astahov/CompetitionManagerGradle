@@ -49,7 +49,7 @@ public class UserService {
     public Optional<UserReadDto> update(Integer id, UserReadDto userDto) {
 
         return userRepository.findById(id)
-                .map(entity -> userMapper.ReadDtoToCreateDto(userDto,  entity))
+                .map(entity -> userMapper.readDtoToCreateDto(userDto,  entity))
                 .map(userRepository::saveAndFlush)
                 .map(userMapper::toDto);
     }
