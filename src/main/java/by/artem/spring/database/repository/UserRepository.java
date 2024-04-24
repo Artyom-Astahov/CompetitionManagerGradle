@@ -12,9 +12,12 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer>,
         FilterUserRepository, QuerydslPredicateExecutor<User>{
+
+    Optional<User> findUserByLogin(String login);
 
 }
