@@ -5,15 +5,15 @@
     <title>Fragments</title>
 </head>
 <body>
-<div th:fragment="header">
-    <form th:action="@{/logout}" method="post">
-        <button type="submit">Logout</button>
-    </form>
-    <form th:action="@{/competitions}" method="get">
+<div th:fragment="header" style="display: flex; justify-content: flex-end;">
+    <form th:action="@{/competitions}" method="get" style="margin-right: 10px;">
         <button type="submit">Competitions</button>
     </form>
-    <form th:action="@{/users}" method="get">
+    <form th:action="@{/users}" method="get" style="margin-right: 10px;">
         <button type="submit">Users</button>
+    </form>
+    <form th:action="@{/logout}" method="post" style="margin-right: 10px;">
+        <button type="submit">Logout</button>
     </form>
 </div>
 </body>

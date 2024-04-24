@@ -23,27 +23,30 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequiredArgsConstructor
 @Slf4j
 public class CompetitionCatalogController {
+
     private final CompetitionCatalogService competitionCatalogService;
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'COACH', 'ATHLETE')")
     @GetMapping
-    public String findAll(Model model, CompetitionCatalogFilter filter, Pageable pageable){
+    public String findAll(Model model, CompetitionCatalogFilter filter, Pageable pageable) {
         Page<CompetitionCatalogReadDto> page = competitionCatalogService.findAll(filter, pageable);
         model.addAttribute("competitions", PageResponse.of(page));
         model.addAttribute("filter", filter);
         return "competition/competitions";
     }
+
     @PreAuthorize("hasAnyAuthority('ADMIN', 'COACH', 'ATHLETE')")
     @GetMapping("/{id}")
-    public String findById(@PathVariable("id") Integer id, Model model){
+    public String findById(@PathVariable("id") Integer id, Model model) {
         return competitionCatalogService.findById(id)
                 .map(competition -> {
                     model.addAttribute("competition", competition);
                     model.addAttribute("users", competition.getUsers());
                     return "competition/competition";
-                        })
+                })
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
+
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping("/{id}/update")
     public String update(@PathVariable("id") Integer id, @ModelAttribute @Validated CompetitionCreateEditDto competitionCreateEditDto) {
@@ -51,6 +54,7 @@ public class CompetitionCatalogController {
                 .map(it -> "redirect:/competitions/{id}")
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
+
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") Integer id) {
@@ -59,16 +63,28 @@ public class CompetitionCatalogController {
     }
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
+    @GetMapping("/create")
+    public String getPageCreateCompetition(Model model,
+                                           @ModelAttribute("competition")
+                                           CompetitionCreateEditDto competitionCreateDto) {
+        model.addAttribute("competition", competitionCreateDto);
+        return "competition/create";
+
+    }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @PostMapping("/create")
     public String createCompetition(@ModelAttribute @Validated CompetitionCreateEditDto competitionCreateDto,
                                     BindingResult bindingResult,
-                                    RedirectAttributes redirectAttributes){
+                                    RedirectAttributes redirectAttributes) {
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("competition", competitionCreateDto);
             redirectAttributes.addFlashAttribute("errors", bindingResult.getAllErrors());
             return "redirect:/competitions/create";
         }
-        CompetitionCatalogReadDto dto =  competitionCatalogService.create(competitionCreateDto);
+        CompetitionCatalogReadDto dto = competitionCatalogService.create(competitionCreateDto);
         return "redirect:/competitions/" + dto.getId();
     }
+
+    //TODO сделать функцию "добавления юзеров на соревнования"
 }

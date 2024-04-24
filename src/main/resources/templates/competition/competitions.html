@@ -24,8 +24,10 @@
                 </label>
             </div>
             <button type="submit">Filter</button>
+</form></br>
+<form th:action="@{/competitions/create}" method="get">
+    <button type="submit">Create Competitions</button>
 </form>
-<button th:href="@{/competitions/create}">Create Competition</button>
 <div th:each="competition : ${competitions.content}">
     <a th:href="@{'/competitions/' + ${competition.id}}"
        th:text="|${competition.dateEvent}   ${competition.description}|">Competition</a>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Create competition</title>
+</head>
+<body>
+<form th:action="@{/competitions/create}" th:method="post" th:object="${competition}">
+    <label for="dateEvent">Date event:
+        <input id="dateEvent" type="datetime-local" name="dateEvent" th:value="*{dateEvent}">
+    </label><br>
+    <label for="description">Description:
+        <input id="description" type="text" name="description" th:value="*{description}">
+    </label><br>
+    <button type="submit">Create</button>
+</form>
+</body>
+</html>

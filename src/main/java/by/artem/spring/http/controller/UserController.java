@@ -32,7 +32,6 @@ import static by.artem.spring.database.entity.RolesEnum.*;
 public class UserController {
 
     private final UserService userService;
-    private final CompetitionCatalogService competitionCatalogService;
 
     @PreAuthorize("hasAnyAuthority('ADMIN', 'COACH', 'ATHLETE')")
     @GetMapping
