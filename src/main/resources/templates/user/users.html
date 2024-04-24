@@ -5,7 +5,8 @@
     <title>Users</title>
 </head>
 <body>
-<form action="/users">
+<div th:insert="~{fragment :: header }"></div>
+<form th:action="@{/users}">
     <label for="name">Name:
         <input id="name" type="text" name="name" th:value="${filter.name()}">
     </label></br>

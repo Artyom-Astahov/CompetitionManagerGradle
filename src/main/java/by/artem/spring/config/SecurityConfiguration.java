@@ -26,7 +26,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf(CsrfConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/login", "/users/registration", "/users", "/users/register", "v3/api-docs/", "/swagger-ui").permitAll()
+                        .requestMatchers("/login", "/users/registration", "/users/register", "v3/api-docs/", "/swagger-ui").permitAll()
                         .requestMatchers("/admin/*").hasRole(ADMIN.getAuthority())
                         .anyRequest().authenticated())
                 .formLogin(login -> login

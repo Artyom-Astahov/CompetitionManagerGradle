@@ -5,7 +5,8 @@
     <title>Competitions</title>
 </head>
 <body>
-<form action="/competitions">
+<div th:insert="~{fragment :: header }"></div>
+<form th:action="@{/competitions}">
     <label for="dateEvent">Date event:
         <input id="dateEvent" type="datetime-local" name="dateEvent" th:value="${filter.dateEvent()}">
 
@@ -24,6 +25,7 @@
             </div>
             <button type="submit">Filter</button>
 </form>
+<button th:href="@{/competitions/create}">Create Competition</button>
 <div th:each="competition : ${competitions.content}">
     <a th:href="@{'/competitions/' + ${competition.id}}"
        th:text="|${competition.dateEvent}   ${competition.description}|">Competition</a>
