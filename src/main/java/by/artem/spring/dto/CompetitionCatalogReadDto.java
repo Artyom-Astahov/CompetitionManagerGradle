@@ -21,5 +21,4 @@ public class CompetitionCatalogReadDto {
     Integer id;
     LocalDateTime dateEvent;
     String description;
-    List<UserReadDto> users;
 }

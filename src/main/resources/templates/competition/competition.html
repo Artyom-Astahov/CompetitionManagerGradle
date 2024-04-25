@@ -24,5 +24,9 @@
         <button type="submit">Remove</button>
     </form>
 </form>
+</br>
+<form th:action="@{/competitions/{competitionId}/participant(competitionId=${competition.id})}" method="get" style="margin-right: 10px;">
+    <button type="submit">Add participant</button>
+</form>
 </body>
 </html>

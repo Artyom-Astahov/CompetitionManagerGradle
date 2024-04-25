@@ -45,6 +45,10 @@ public class UserService implements UserDetailsService {
                 .map(userMapper::toDto);
     }
 
+    public List<User> findAllByRoleAthlete(){
+        return userRepository.findAllByRoleAthlete();
+    }
+
     public Optional<UserReadDto> findById(Integer id) {
         Optional<UserReadDto> obj = userRepository.findById(id)
                 .map(userMapper::toDto);

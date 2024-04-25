@@ -20,4 +20,8 @@ public interface UserRepository extends JpaRepository<User, Integer>,
 
     Optional<User> findUserByLogin(String login);
 
+    @Query("select u from User u " +
+            "where u.role = 'ATHLETE'")
+    List<User> findAllByRoleAthlete();
+
 }

@@ -17,6 +17,7 @@ public interface UserMapper {
     UserReadDto toDto(User user);
     User toEntity(UserCreateEditDto userCreateEditDto);
     UserInfo toEntityUserInfo(UserInfoCreateEditDto userInfoCreateEditDto);
+    User toEntity(UserReadDto userReadDto);
 
     default User readDtoToCreateDto(UserReadDto fromObject, User toObject){
         toObject.setRole(fromObject.getRole());

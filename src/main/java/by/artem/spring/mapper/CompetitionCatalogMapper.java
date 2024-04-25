@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 public interface CompetitionCatalogMapper {
     CompetitionCatalogReadDto toDto(CompetitionCatalog competitionCatalog);
     CompetitionCatalog toEntity(CompetitionCreateEditDto competitionCreateEditDto);
+    CompetitionCatalog toEntity(CompetitionCatalogReadDto competitionCatalogReadDto);
 
     default CompetitionCatalog ReadDtoToCreateDto(CompetitionCreateEditDto fromObject, CompetitionCatalog toObject){
         toObject.setDateEvent(fromObject.getDateEvent());

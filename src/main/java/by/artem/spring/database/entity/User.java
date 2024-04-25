@@ -31,21 +31,12 @@ public class User implements BaseEntity<Integer>{
     )
     private UserInfo userInfo;
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "participants", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "competition_catalog_id"))
-    private List<CompetitionCatalog> competitionCatalogs = new ArrayList<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
+    private List<Participant> participants = new ArrayList<>();
 
 
 
 
-    public void addCompetitionCatalog(CompetitionCatalog competitionCatalog) {
-        log.info("Добавление соревнований в список соревнований в классе Users");
-        log.debug("Проверка приходящего класса CompetitionCatalog в классе Users, для добавления в List {}",
-                competitionCatalog);
-        competitionCatalogs.add(competitionCatalog);
-        competitionCatalog.getUsers().add(this);
-    }
 
 
 }

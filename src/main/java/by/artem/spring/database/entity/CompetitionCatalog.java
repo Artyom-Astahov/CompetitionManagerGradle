@@ -17,7 +17,7 @@ import java.util.List;
 @ToString(exclude = "users")
 @Table(schema = "public")
 
-public final class CompetitionCatalog implements BaseEntity<Integer>{
+public final class CompetitionCatalog implements BaseEntity<Integer> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,9 +25,10 @@ public final class CompetitionCatalog implements BaseEntity<Integer>{
     private String description;
 
     @Builder.Default
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "participants", joinColumns = @JoinColumn(name = "competition_catalog_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users = new ArrayList<>();
+    @OneToMany(mappedBy = "competitionCatalog",
+            cascade = CascadeType.ALL,
+            fetch = FetchType.EAGER,
+            orphanRemoval = true)
+    private List<Participant> participant = new ArrayList<>();
 
 }

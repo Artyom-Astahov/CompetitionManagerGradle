@@ -5,6 +5,7 @@
     <title>Create competition</title>
 </head>
 <body>
+<div th:insert="~{fragment :: header }"></div>
 <form th:action="@{/competitions/create}" th:method="post" th:object="${competition}">
     <label for="dateEvent">Date event:
         <input id="dateEvent" type="datetime-local" name="dateEvent" th:value="*{dateEvent}">

@@ -19,7 +19,6 @@ public class UserReadDto {
     String password;
     RolesEnum role;
     UserInfoReadDto userInfo;
-    //TODO Почему-то не выдает ошибку, при маппинге
-//    List<CompetitionCatalogReadDto> competitionCatalogs;
+
 
 }
