@@ -103,8 +103,7 @@ public class CompetitionCatalogController {
 
     @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping("/{id}/participant")
-    public String getPageAddParticipant(@PathVariable("id") Integer id,
-                                        @ModelAttribute CompetitionCatalogReadDto competitionReadDto,
+    public String getPageAddParticipant(@ModelAttribute CompetitionCatalogReadDto competitionReadDto,
                                         Model model) {
 
         List<User> listUsers = userService.findAllByRoleAthlete();
